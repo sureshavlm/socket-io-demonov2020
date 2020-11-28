@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<title>Socket IO Demo</title>
+		<script src="/socket.io/socket.io.js"></script>
+
+
+		<script type="text/javascript">
+			var socket = io.connect(); //connects to server
+			socket.on('acknowledgement', function() {
+				alert('acknowledgement received');
+			});
+
+			function onSendClick() {
+				var message = document.getElementById('messageTI').value;
+				socket.emit('add user', message);
+			}
+
+			socket.on('greeting', function(message) {
+				document.getElementById('messages-container').innerHTML = message;
+			});
+		</script>
+
+	</head>
+
+	<body>
+		<h1>Socket Messaging Example</h1>
+		<div id="messages-container">
+		</div>
+		Enter Text: <input type="text" id="messageTI"><br/>
+		<button onClick="onSendClick()">Send</button>
+	</body>
+
+</html>
+	
